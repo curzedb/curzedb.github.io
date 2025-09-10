@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>AI Chatbot - jafarrahadian</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="https://github.com/curzedb"><span class="icon brands fa-github"></span> GitHub</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="rfq.html">RFQ Automatiion</a></li>
+									<li><a href="internal-claim.html">Internal Claim</a></li>
+									<li><a href="aisite.html">AI Based Chatbot</a></li>
+									<li><a href="compressor.html">Compressor Anomaly Predictive</a></li>
+									<li>
+										<a href="#">others</a>
+										<ul>
+											<li><a href="https://github.com/curzedb/prediksisaham_jafarrahadian">Stocks and Cryptocurrencies Prediction</a></li>
+											<li><a href="#">Soon</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>(AISite) Conversational AI Site for Private Knowledge Base</h2>
+							<p>A full-stack application leveraging Retrieval-Augmented Generation (RAG) to provide accurate answers from private documents.</p>
+						</header>
+
+						<!-- Content -->
+							<section id="content">
+								<a href="#" class="image fit"><img src="images/aisite.png" alt="AI Chatbot Interface" /></a>
+
+								<h3>Project Overview</h3>
+								<p class="text-justify">
+									The AISite is a sophisticated, full-stack conversational AI platform designed to serve as an intelligent interface for an internal knowledge base. Its core purpose is to allow users to get fast and accurate answers from a private collection of documents (PDFs, DOCX, etc.) through an intuitive chat interaction, preventing the AI from hallucinating or providing information from outside its designated knowledge scope.
+								</p>
+
+								<h3>Core AI Technology: Retrieval-Augmented Generation (RAG)</h3>
+								<p>
+									The intelligence behind the chatbot is a meticulously designed RAG pipeline, which ensures that every answer is grounded in the provided documents. The process works as follows:
+								</p>
+								<ol>
+									<li><b>Query Transformation:</b> The user's raw question is first processed by a small, fast LLM (Llama 3.2 3B) to rephrase it into an optimized search query.</li>
+									<li><b>Vector Retrieval:</b> The optimized query is used to search a FAISS vector database, retrieving the 16 most semantically similar text chunks from the knowledge base.</li>
+									<li><b>Relevance Gate:</b> To reduce noise, a hybrid filter ensures only the most relevant chunks are used. The top-scoring chunk is always included, while the rest must pass a similarity threshold to proceed.</li>
+									<li><b>Prompt Engineering:</b> The filtered, relevant text chunks are compiled into a single context block, which is then combined with the user's original question to create a final, context-rich prompt.</li>
+									<li><b>Answer Generation:</b> This final prompt is sent to the main LLM (Llama 3.2 3B or Deepseek qween 1.5B), which is strictly instructed to formulate an answer based *only* on the provided context, saying "I don't know" if the information is not present.</li>
+									<li><b>Streaming Response:</b> The generated answer is streamed back to the user word-by-word, creating a responsive and dynamic chat experience.</li>
+								</ol>
+
+								<h3>Full-Stack Architecture</h3>
+								<p>
+									The application is built on a modern, decoupled architecture with three main components communicating via a REST API.
+								</p>
+								<ul>
+									<li><b>Frontend:</b> An interactive and responsive user interface built with <strong>Next.js, TypeScript, and Material-UI (MUI)</strong>.</li>
+									<li><b>Backend:</b> A high-performance API server built with <strong>FastAPI (Python) and SQLAlchemy</strong> for business logic, AI processing, and database interactions.</li>
+									<li><b>Database:</b> <strong>Microsoft SQL Server</strong> is used for persistent data storage, including user information, chat history, and document metadata.</li>
+									<li><b>Deployment:</b> The entire stack is deployed on a <strong>Windows Server</strong>, with the Frontend and Backend processes managed as continuous services by <strong>NSSM</strong>, and unified under a single entry point using <strong>IIS as a reverse proxy</strong>.</li>
+								</ul>
+							</section>
+
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/jafar-rahadian/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/curzedb/" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="mailto: muhammadjafar954@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; jafarrahadian. All rights reserved.</li><li>Get the template at: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>RFQ Automation - jafarrahadian</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="https://github.com/curzedb"><span class="icon brands fa-github"></span> GitHub</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>
+								<a href="#">Projects</a>
+								<ul>
+									<li><a href="rfq.html">RFQ Automation</a></li>
+									<li><a href="internal-claim.html">Internal Claim</a></li>
+									<li><a href="aisite.html">AI Based Chatbot</a></li>
+									<li><a href="compressor.html">Compressor Anomaly Predictive</a></li>
+									<li>
+										<a href="#">others</a>
+										<ul>
+											<li><a href="https://github.com/curzedb/prediksisaham_jafarrahadian">Stocks and Cryptocurrencies Prediction</a></li>
+											<li><a href="#">Soon</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>Predictive Monitoring System for Industrial Compressors</h2>
+							<p>A web-based application for real-time sensor data monitoring, anomaly detection, and predictive forecasting using custom-trained machine learning models.</p>
+						</header>
+						<div class="row gtr-150">
+
+						<!-- Content -->
+							<section id="content">
+								<a href="#" class="image fit"><img src="images/compressor.png" alt="Compressor Monitoring Dashboard" /></a>
+
+								<h3>Project Overview</h3>
+								<p style="text-align: justify;">
+									This project is a sophisticated web-based system designed to monitor real-time sensor data from Atlas Copco compressors. The application integrates two core machine learning functionalities: <strong>predictive forecasting</strong> to predict future sensor values and <strong>anomaly detection</strong> to identify unusual operational patterns. The system features an interactive dashboard for data visualization and a dedicated service for on-demand model training and analysis, providing a complete solution for proactive industrial maintenance.
+								</p>
+
+								<h3>Machine Learning Strategy</h3>
+								<p>
+									The system employs a suite of custom-trained machine learning models, with tailored strategies for different types of sensor data to maximize accuracy and relevance.
+								</p>
+								<ul>
+									<li><b>Time-Series Forecasting:</b> A <strong>LightGBM Regressor</strong> is used for its speed and accuracy. The model's strategy adapts to the data's nature:
+										<ul>
+											<li>For standard data (e.g., temperature, pressure), it predicts values directly using lag features and rolling statistics.</li>
+											<li>For cumulative data (e.g., consumption), it predicts the rate of change (`.diff()`) and reconstructs the total value using a cumulative sum (`np.cumsum`).</li>
+											<li>For imbalanced data (e.g., on/off flow), a sophisticated two-model approach is used: a <strong>Random Forest Classifier</strong> (trained on SMOTE-balanced data) predicts the "on/off" state, while a LightGBM Regressor predicts the value *only* when the state is "on."</li>
+										</ul>
+									</li>
+									<li><b>Anomaly Detection:</b> Two distinct models are used based on data characteristics:
+										<ul>
+											<li>A <strong>PyTorch LSTM Autoencoder</strong> is used for univariate time-series data. It learns to reconstruct normal signal patterns; a high reconstruction error on new data indicates an anomaly.</li>
+											<li>An <strong>Isolation Forest</strong> model is used for multivariate data, where it effectively isolates anomalous data points by leveraging multiple features simultaneously.</li>
+										</ul>
+									</li>
+								</ul>
+
+								<h3>System Architecture & Technology</h3>
+								<p>
+									The application is architected with three decoupled components to handle different responsibilities efficiently, ensuring the user interface remains responsive even during intensive ML model training.
+								</p>
+								<ul>
+									<li><b>Frontend:</b> An interactive dashboard built with <strong>Next.js</strong> and <strong>ReactECharts</strong> for dynamic data visualization. It communicates with the backend services via both HTTP (for historical data) and WebSockets (for real-time data and training logs).</li>
+									<li><b>Backend Service:</b> A <strong>FastAPI (Python)</strong> application responsible for serving historical and real-time sensor data, and performing real-time anomaly detection using pre-trained models.</li>
+									<li><b>Prediction Service:</b> A dedicated <strong>FastAPI (Python)</strong> service that handles all heavy machine learning tasks. It exposes WebSocket endpoints to trigger on-demand model training as a separate subprocess, stream training logs back to the user, and serve forecast results.</li>
+								</ul>
+							</section>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/jafar-rahadian/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/curzedb/" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="mailto: muhammadjafar954@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; jafarrahadian. All rights reserved.</li><li>Get the template at: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
